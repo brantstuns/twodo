@@ -1,25 +1,18 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-
+import { StyleSheet, Switch, Text, View } from 'react-native';
+import CheckBox from 'react-native-modest-checkbox'
 
 export default function TodoItem(props) {
-  console.log(props);
+  const { done, value, id } = props.todoItem;
   return (
     <View style={styles.todoItem}>
-      <Text style={styles.todoItemText}>
-        {props.text}
-      </Text>
+      <CheckBox onChange={() => props.handleItemClick(id)} checked={done} label={value} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   todoItem: {
-    flex: 1
-  },
-  todoItemText: {
-    fontSize: 20,
-    color: '#A77066',
-    textAlign: 'center'
+    justifyContent: 'center'
   }
 });

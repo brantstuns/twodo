@@ -2,9 +2,14 @@ import React from 'react';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 import TodoItem from './TodoItem';
+import * as todoListActions from '../actions/todoListActions';
 
 const mapStateToProps = state => ({
   todoItems: state.todoItems
+});
+
+const mapDispatchToProps = dispatch => ({
+  updatedTodoItemDoneState: itemToUpdate => dispatch(todoListActions.updatedTodoItemDoneState(itemToUpdate))
 });
 
 export class TodoList extends React.Component {
@@ -13,13 +18,12 @@ export class TodoList extends React.Component {
   }
 
   render() {
-    console.log(this.props.todoItems);
     return (
       <View style={styles.todoListContainer}>
         <FlatList
           data={this.props.todoItems}
           keyExtractor={item => item.value}
-          renderItem={({item}) => <TodoItem text={item.value}/>}
+          renderItem={({item}) => <TodoItem todoItem={item} handleItemClick={this.props.updatedTodoItemDoneState}/>}
         />
       </View>
     );
@@ -37,4 +41,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default connect(mapStateToProps)(TodoList);
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
