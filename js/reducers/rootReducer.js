@@ -7,6 +7,9 @@ const defaultState = {
 
 export default function(state = defaultState, action) {
   switch(action.type) {
+    case 'ADD_NEW_TODO_ITEM':
+      const updatedTodoItemsArray = state.todoItems.concat({ id: state.todoItems.length, value: 'nice', done: false });
+      return { ...state, todoItems: updatedTodoItemsArray };
     case 'TOGGLE_ITEM_DONE':
       const updatedItemsArray =
         state.todoItems.map(item =>

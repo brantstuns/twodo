@@ -4,3 +4,9 @@ export function updatedTodoItemDoneState(itemToUpdate) {
     itemToUpdate
   };
 }
+
+export function addNewTodoItem() {
+  return {
+    type: 'ADD_NEW_TODO_ITEM'
+  };
+}
